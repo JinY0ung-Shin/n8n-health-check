@@ -18,18 +18,17 @@ graph LR
 ## 🚀 설치 및 실행 (Installation)
 
 ### 1. 전제 조건 (Prerequisites)
-- Windows WSL2 (Ubuntu) 환경
-- Docker 및 Docker Compose (설치되어 있지 않아도 아래 스크립트로 설치 가능)
+- **모든 리눅스 환경 (Ubuntu, CentOS, Debian 등)**
+- Windows WSL2 (Ubuntu)
+- **Docker & Docker Compose**가 필수로 설치되어 있어야 합니다.
+    - [Docker 공식 설치 가이드](https://docs.docker.com/engine/install/)
 
 ### 2. 빠른 시작 (Quick Start)
 터미널에서 아래 명령어를 순서대로 실행하세요:
 
 ```bash
-# 1. 도커 설치 (이미 설치되어 있다면 생략 가능)
-bash install_docker.sh
-
-# 2. 서비스 실행
-# (권한 에러 발생 시 'newgrp docker' 입력 후 다시 시도)
+# 서비스 실행
+# (권한 에러 발생 시 'newgrp docker' 입력 또는 sudo 사용)
 docker compose up -d
 ```
 
