@@ -3,8 +3,7 @@ services:
     image: louislam/uptime-kuma:1
     container_name: uptime-kuma
     restart: always
-    ports:
-      - "3001:3001"
+    network_mode: host
     volumes:
       - uptime-kuma-data:/app/data
 
@@ -12,11 +11,11 @@ services:
     image: n8nio/n8n
     container_name: n8n
     restart: always
-    ports:
-      - "5678:5678"
+    network_mode: host
     environment:
       - GENERIC_TIMEZONE=Asia/Seoul
       - TZ=Asia/Seoul
+      - N8N_PORT=55678
     volumes:
       - n8n_data:/home/node/.n8n
 
