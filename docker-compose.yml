@@ -4,9 +4,21 @@ services:
     container_name: uptime-kuma
     restart: always
     network_mode: host
+    command: ["node", "server/server.js", "--port=9091"]
+    environment:
+      - SSL_CERT_DIR=${SSL_CERT_DIR}
+      - SSL_CERT_FILE=${SSL_CERT_FILE}
+      - NODE_EXTRA_CA_CERTS=${SSL_CERT_FILE}
+      - HTTP_PROXY=${HTTP_PROXY}
+      - HTTPS_PROXY=${HTTPS_PROXY}
+      - NO_PROXY=${NO_PROXY}
+      - http_proxy=${HTTP_PROXY}
+      - https_proxy=${HTTPS_PROXY}
+      - no_proxy=${NO_PROXY}
     volumes:
       - uptime-kuma-data:/app/data
-
+      - ${SSL_CERT_FILE}:${SSL_CERT_FILE}:ro
+      - ${SSL_CERT_DIR}:${SSL_CERT_DIR}:ro
   n8n:
     image: n8nio/n8n
     container_name: n8n
@@ -15,9 +27,12 @@ services:
     environment:
       - GENERIC_TIMEZONE=Asia/Seoul
       - TZ=Asia/Seoul
-      - N8N_PORT=55678
+      - N8N_PORT=9093
+      - SSL_CERT_FILE=${SSL_CERT_FILE}
+      - NODE_EXTRA_CA_CERTS=${SSL_CERT_FILE}
     volumes:
       - n8n_data:/home/node/.n8n
+      - ${SSL_CERT_FILE}:${SSL_CERT_FILE}:ro
 
 volumes:
   uptime-kuma-data:
